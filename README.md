@@ -2,3 +2,4 @@
 
 - Expo
 - react-native-paper
+- styled-components
