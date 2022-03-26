@@ -22,7 +22,8 @@
     "react-native-paper": "^4.11.2",
     "react-native-web": "0.17.1",
     "styled-components": "^5.3.5",
-    "undefined": "@expo-google-/fonts/oswald"
+    "undefined": "@expo-google-/fonts/oswald",
+    "react-native-svg": "12.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

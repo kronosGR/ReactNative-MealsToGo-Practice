@@ -3,3 +3,4 @@
 - Expo
 - react-native-paper
 - styled-components
+- react-native-svg
