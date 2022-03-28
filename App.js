@@ -1,23 +1,25 @@
-import React from 'react';
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React from 'react';
+import { Text } from 'react-native';
+import { ThemeProvider } from 'styled-components/native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
 import { useFonts as useOswald, Oswald_400Regular } from '@expo-google-fonts/oswald';
-import {
-  useFonts as useLato,
-  Lato_400Regular,
-  Lato_700Bold,
-} from '@expo-google-fonts/lato';
+import { useFonts as useLato, Lato_400Regular } from '@expo-google-fonts/lato';
 
-import { ThemeProvider } from 'styled-components/native';
-import { theme } from './src/infrastructure/theme/index';
+import { theme } from './src/infrastructure/theme';
 import { RestaurantsScreen } from './src/features/restaurants/screens/restaurant.screen';
-import { Text } from 'react-native';
 import { SafeArea } from './src/components/utility/safe-area.components';
 
 const Tab = createBottomTabNavigator();
+
+const TAB_ICON = {
+  Restaurants: 'md-restaurant',
+  Map: 'md-map',
+  Settings: 'md-settings',
+};
 
 const Settings = () => (
   <SafeArea>
@@ -30,33 +32,34 @@ const Map = () => (
   </SafeArea>
 );
 
-export default function App() {
-  const [oswaldLoaded] = useOswald({ Oswald_400Regular });
-  const [latoLoaded] = useLato({ Lato_400Regular, Lato_700Bold });
+const createScreenOptions = ({ route }) => {
+  const iconName = TAB_ICON[route.name];
+  return {
+    tabBarIcon: ({ size, color }) => (
+      <Ionicons name={iconName} size={size} color={color} />
+    ),
+  };
+};
 
-  if (!oswaldLoaded || !latoLoaded) return null;
+export default function App() {
+  const [oswaldLoaded] = useOswald({
+    Oswald_400Regular,
+  });
+
+  const [latoLoaded] = useLato({
+    Lato_400Regular,
+  });
+
+  if (!oswaldLoaded || !latoLoaded) {
+    return null;
+  }
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <NavigationContainer>
           <Tab.Navigator
-            screenOptions={({ route }) => ({
-              tabBarIcon: ({ color, size }) => {
-                let iconName;
-
-                if (route.name === 'Restaurants') {
-                  iconName = 'md-restaurant';
-                } else if (route.name === 'Settings') {
-                  iconName = 'md-settings';
-                } else if (route.name === 'Map') {
-                  iconName = 'md-map';
-                }
-
-                // You can return any component that you like here!
-                return <Ionicons name={iconName} size={size} color={color} />;
-              },
-            })}
+            screenOptions={createScreenOptions}
             tabBarOptions={{
               activeTintColor: 'tomato',
               inactiveTintColor: 'gray',
@@ -66,8 +69,8 @@ export default function App() {
             <Tab.Screen name='Settings' component={Settings} />
           </Tab.Navigator>
         </NavigationContainer>
-        <ExpoStatusBar style='auto' />
       </ThemeProvider>
+      <ExpoStatusBar style='auto' />
     </>
   );
 }
