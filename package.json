@@ -16,6 +16,7 @@
     "@expo/vector-icons": "^12.0.0",
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.8",
+    "@react-navigation/stack": "^6.1.1",
     "camelize": "^1.0.0",
     "expo": "~44.0.0",
     "expo-font": "~10.0.4",
@@ -29,7 +30,8 @@
     "react-native-svg": "12.1.1",
     "react-native-web": "0.17.1",
     "styled-components": "^5.3.5",
-    "undefined": "@expo-google-/fonts/oswald"
+    "undefined": "@expo-google-/fonts/oswald",
+    "react-native-gesture-handler": "~2.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
