@@ -6,7 +6,7 @@ import { Text } from 'react-native';
 
 import { SafeArea } from '../../components/utility/safe-area.components';
 import { RestaurantNavigator } from './restaurant.navigator';
-import { MapScreen } from '../../features/restaurants/map/screens/map.screens';
+import { MapScreen } from '../../features/map/screens/map.screens';
 
 const Tab = createBottomTabNavigator();
 
