@@ -9,6 +9,7 @@ import { RestaurantsContext } from '../../../services/restaurants/restaurants.co
 import { Search } from '../components/search.component';
 import { ActivityIndicator, Colors } from 'react-native-paper';
 import { FavouritesBar } from '../../../components/favourites/favourites-bar.component';
+import { FavouritesContext } from '../../../services/favourites/favourites.context';
 
 const Loading = styled(ActivityIndicator)`
   margin-left: -25px;
@@ -28,6 +29,7 @@ const RestaurantList = styled(FlatList).attrs({
 export const RestaurantsScreen = ({ navigation }) => {
   const { isLoading, restaurants } = useContext(RestaurantsContext);
   const [isToggled, setIsToggled] = useState(false);
+  const { favourites } = useContext(FavouritesContext);
 
   return (
     <SafeArea>
@@ -40,7 +42,9 @@ export const RestaurantsScreen = ({ navigation }) => {
         isFavouritesToggled={isToggled}
         onFavouritesToggle={() => setIsToggled(!isToggled)}
       />
-      {isToggled && <FavouritesBar />}
+      {isToggled && (
+        <FavouritesBar favourites={favourites} onNavigate={navigation.navigate} />
+      )}
       <RestaurantList
         data={restaurants}
         renderItem={({ item }) => {
