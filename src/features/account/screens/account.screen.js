@@ -1,5 +1,6 @@
 import React from 'react';
 import { Spacer } from '../../../components/spacer/spacer.component';
+import { Title } from '../components/account.styles';
 import {
   AccountBackground,
   AccountContainer,
@@ -11,6 +12,7 @@ export const AccountScreen = ({ navigation }) => {
   return (
     <AccountBackground>
       <AccountCover />
+      <Title>Meals To Go</Title>
       <AccountContainer>
         <AuthButton
           icon='lock-open-outline'
